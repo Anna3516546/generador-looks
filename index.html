@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Generador de Looks</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body, .menu-btn, .submenu li button, .main-content, header h1, .stat-block h3, .stat-block p {
+      font-family: 'Roboto', sans-serif !important;
+    }
+    body {
+      background: #fff;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 210px;
+      background: #fafafa;
+      border-right: 1px solid #eee;
+      padding-top: 2rem;
+      min-height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 100;
+    }
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #222;
+      padding: 1rem 1.2rem;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.18s, color 0.18s;
+      margin-bottom: 2px;
+    }
+    .menu-btn:hover, .menu-btn.active {
+      background: #eaeaea;
+      color: #000;
+    }
+    .submenu {
+      display: none;
+      list-style: none;
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+    .submenu.open {
+      display: block;
+    }
+    .submenu li button {
+      background: none;
+      border: none;
+      color: #444;
+      font-size: 1rem;
+      padding: 0.7rem 0.5rem 0.7rem 0.7rem;
+      text-align: left;
+      width: 90%;
+      border-radius: 6px;
+      margin-bottom: 2px;
+      cursor: pointer;
+      transition: background 0.16s, color 0.16s;
+    }
+    .submenu li button:hover, .submenu li button.active {
+      background: #e0e0e0;
+      color: #000;
+    }
+    .main-content {
+      margin-left: 210px;
+      padding: 2.5rem 2rem 2rem 2rem;
+      width: 100%;
+      max-width: 1100px;
+    }
+    header {
+      background: #ff69b4;
+      border: none;
+      position: fixed;
+      left: 210px;
+      right: 0;
+      top: 0;
+      z-index: 101;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      padding: 0;
+      letter-spacing: 2px;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+    }
+    @media (max-width: 800px) {
+      .container { flex-direction: column; }
+      .sidebar { width: 100vw; height: auto; position: static; border-right: none; border-bottom: 1px solid #eee; }
+      .main-content { margin-left: 0; }
+      header { left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Pantalla d'accés (login) -->
+  <div id="login-overlay">
+    <form id="login-box" onsubmit="return loginFormSubmit(event)">
+      <!-- ... (resta del formulari de login) ... -->
+    </form>
+  </div>
+  <div class="container">
+    <aside class="sidebar">
+      <ul class="menu">
+        <li>
+          <button class="menu-btn" onclick="toggleSubmenu('armari-sub')">Armari ▼</button>
+          <ul class="submenu" id="armari-sub">
+            <!-- ... (submenu) ... -->
+          </ul>
+        </li>
+        <!-- ... (altres menús) ... -->
+      </ul>
+    </aside>
+    <main class="main-content">
+      <header>
+        <h1>Generador de Looks</h1>
+      </header>
+      <!-- ... (resta del contingut principal) ... -->
+    </main>
+  </div>
+  <!-- ... (scripts i JS) ... -->
+</body>
+</html>
