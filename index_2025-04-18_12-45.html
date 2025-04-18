@@ -1,0 +1,138 @@
+<!-- Versió nova, estructurada, amb armari càpsula, filtres integrats i totes les seccions, 2025-04-18 12:45 -->
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Looks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; font-family: 'Roboto', Arial, Helvetica, sans-serif; background: #fafafa; color: #222; min-height: 100vh; display: flex; }
+    .sidebar { width: 240px; background: #f2f2f2; color: #222; display: flex; flex-direction: column; padding: 0; border-right: 1px solid #e0e0e0; min-height: 100vh; }
+    .sidebar-header { padding: 32px 24px 24px 24px; font-size: 1.7rem; font-weight: 700; text-align: left; letter-spacing: 1px; border-bottom: 1px solid #e0e0e0; color: #222; background: #f2f2f2; }
+    .menu { flex: 1; display: flex; flex-direction: column; padding: 80px 0 0 0; background: #f2f2f2; }
+    .menu-item { border: none; background: none; color: #222; text-align: left; padding: 12px 32px; font-size: 1rem; cursor: pointer; transition: background 0.15s; border-radius: 0 20px 20px 0; margin: 0 0 2px 0; font-family: inherit; font-weight: 600; position: relative; outline: none; }
+    .menu-item.active, .menu-item:hover { background: #eaeaea; }
+    .submenu { display: none; flex-direction: column; margin-left: 0; padding-left: 20px; border-left: 2px solid #e0e0e0; background: #f7f7fa; }
+    .menu-item.open + .submenu { display: flex; }
+    .submenu-btn { background: none; border: none; color: #444; text-align: left; padding: 10px 18px; font-size: 0.95rem; cursor: pointer; font-family: inherit; border-radius: 0 16px 16px 0; margin: 0 0 2px 0; transition: background 0.13s; }
+    .submenu-btn.active, .submenu-btn:hover { background: #e0e0e0; font-weight: 600; }
+    main { flex: 1; padding: 40px 32px 32px 32px; min-width: 0; display: flex; flex-direction: column; gap: 32px; background: #fafafa; }
+    section { display: none; background: #fff; border-radius: 10px; border: 1px solid #ececec; padding: 32px 28px; box-shadow: none; }
+    section.active { display: block; }
+    h2 { margin-top: 0; font-size: 2rem; color: #222; letter-spacing: 0.5px; font-weight: 700; }
+    .capsule-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(130px,1fr)); gap: 1.2rem; margin-top: 1.6rem; }
+    .capsule-item { border: 1px solid #eee; border-radius: 8px; background: #fff; text-align: center; padding: 0.7em; }
+    .capsule-item img { width: 90px; height: 90px; object-fit: cover; border-radius: 7px; }
+    .filters-form { display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:flex-end;margin-top:2.2rem;margin-bottom:1.6rem; }
+    @media (max-width: 900px) { .sidebar { width: 170px; } main { padding: 24px 8px; } }
+    @media (max-width: 600px) { .sidebar { display: none; } main { margin: 0; padding: 10px; } }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-header">Generador de Looks</div>
+    <nav class="menu">
+      <button class="menu-item" onclick="toggleMenu(event, 'armari-submenu')">Armari</button>
+      <div class="submenu" id="armari-submenu">
+        <button class="submenu-btn" onclick="showSection('armari-totes')">Totes les peces</button>
+        <button class="submenu-btn" onclick="showSection('armari-capsula')">Armari càpsula</button>
+        <button class="submenu-btn" onclick="showSection('armari-afegir')">Afegir peça</button>
+      </div>
+      <button class="menu-item" onclick="toggleMenu(event, 'inspiracio-submenu')">Inspiració</button>
+      <div class="submenu" id="inspiracio-submenu">
+        <button class="submenu-btn" onclick="showSection('inspo-moodboard')">Moodboard</button>
+        <button class="submenu-btn" onclick="showSection('inspo-instagram')">Instagram</button>
+        <button class="submenu-btn" onclick="showSection('inspo-pinterest')">Pinterest</button>
+      </div>
+      <button class="menu-item" onclick="toggleMenu(event, 'maquillatge-submenu')">Maquillatge</button>
+      <div class="submenu" id="maquillatge-submenu">
+        <button class="submenu-btn" onclick="showSection('maquillatge-consells')">Consells</button>
+        <button class="submenu-btn" onclick="showSection('maquillatge-looks')">Looks</button>
+      </div>
+      <button class="menu-item" onclick="toggleMenu(event, 'colorimetria-submenu')">Colorimetria</button>
+      <div class="submenu" id="colorimetria-submenu">
+        <button class="submenu-btn" onclick="showSection('colorimetria-paleta')">Paleta de colors</button>
+      </div>
+      <button class="menu-item" onclick="toggleMenu(event, 'estadistiques-submenu')">Estadístiques</button>
+      <div class="submenu" id="estadistiques-submenu">
+        <button class="submenu-btn" onclick="showSection('estadistiques-us')">Ús</button>
+        <button class="submenu-btn" onclick="showSection('estadistiques-wishlist')">Wishlist</button>
+      </div>
+      <button class="menu-item" onclick="toggleMenu(event, 'ajuda-submenu')">Ajuda</button>
+      <div class="submenu" id="ajuda-submenu">
+        <button class="submenu-btn" onclick="showSection('ajuda-faq')">Preguntes freqüents</button>
+        <button class="submenu-btn" onclick="showSection('ajuda-suport')">Suport</button>
+      </div>
+    </nav>
+  </aside>
+  <main>
+    <section id="armari-totes" class="active">
+      <h2>Totes les peces</h2>
+      <form class="filters-form">
+        <label>Tipus:
+          <select>
+            <option>Tots</option><option>Samarreta</option><option>Camisa</option><option>Jaqueta</option><option>Jersei</option><option>Pantalons</option><option>Faldilla</option><option>Vestit</option><option>Abric</option><option>Calçat</option><option>Accessoris</option>
+          </select>
+        </label>
+        <label>Color:<input type="color" value="#ffffff"></label>
+        <label>Estació:<select><option>Totes</option><option>Primavera</option><option>Estiu</option><option>Tardor</option><option>Hivern</option></select></label>
+        <label>Etiquetes:<select multiple size="4" style="min-width:110px;"><option>Bàsic</option><option>Casual</option><option>Formal</option><option>Esport</option></select></label>
+        <button type="submit">Filtrar</button>
+      </form>
+      <div class="capsule-grid">
+        <div class="capsule-item"><img src="https://via.placeholder.com/90x90?text=Samarreta"><div>Samarreta blanca</div></div>
+        <div class="capsule-item"><img src="https://via.placeholder.com/90x90?text=Pantalons"><div>Pantalons negres</div></div>
+        <div class="capsule-item"><img src="https://via.placeholder.com/90x90?text=Vestit"><div>Vestit blau</div></div>
+      </div>
+    </section>
+    <section id="armari-capsula">
+      <h2>Armari càpsula</h2>
+      <form class="filters-form">
+        <label>Categoria:<select><option>Totes</option><option>Superior</option><option>Inferior</option><option>Calçat</option><option>Accessoris</option></select></label>
+        <label>Color:<input type="color" value="#ffffff"></label>
+        <label>Estació:<select><option>Totes</option><option>Primavera</option><option>Estiu</option><option>Tardor</option><option>Hivern</option></select></label>
+        <button type="submit">Filtrar</button>
+      </form>
+      <div class="capsule-grid">
+        <div class="capsule-item"><img src="https://via.placeholder.com/90x90?text=Jersei"><div>Jersei gris</div></div>
+        <div class="capsule-item"><img src="https://via.placeholder.com/90x90?text=Faldilla"><div>Faldilla negra</div></div>
+      </div>
+    </section>
+    <section id="armari-afegir"><h2>Afegir peça</h2><form><input type="text" placeholder="Nom de la peça" required><input type="file" accept="image/*" required><button type="submit">Afegir</button></form></section>
+    <section id="inspo-moodboard"><h2>Moodboard</h2></section>
+    <section id="inspo-instagram"><h2>Instagram</h2></section>
+    <section id="inspo-pinterest"><h2>Pinterest</h2></section>
+    <section id="maquillatge-consells"><h2>Consells de maquillatge</h2></section>
+    <section id="maquillatge-looks"><h2>Looks de maquillatge</h2></section>
+    <section id="colorimetria-paleta"><h2>Paleta de colors</h2></section>
+    <section id="estadistiques-us"><h2>Ús</h2></section>
+    <section id="estadistiques-wishlist"><h2>Wishlist</h2></section>
+    <section id="ajuda-faq"><h2>Preguntes freqüents</h2></section>
+    <section id="ajuda-suport"><h2>Suport</h2></section>
+  </main>
+  <script>
+    function toggleMenu(event, submenuId) {
+      document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('open'));
+      document.querySelectorAll('.submenu').forEach(sub => sub.style.display = 'none');
+      event.currentTarget.classList.add('open');
+      document.getElementById(submenuId).style.display = 'flex';
+    }
+    function showSection(id) {
+      document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+      var section = document.getElementById(id);
+      if (section) section.classList.add('active');
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      var primerMenu = document.querySelector('.menu-item');
+      if (primerMenu) {
+        primerMenu.classList.add('open');
+        var primerSub = document.getElementById(primerMenu.getAttribute('onclick').split("'")[1]);
+        if (primerSub) primerSub.style.display = 'flex';
+      }
+      var primerSection = document.querySelector('main section');
+      if (primerSection) primerSection.classList.add('active');
+    });
+  </script>
+</body>
+</html>
